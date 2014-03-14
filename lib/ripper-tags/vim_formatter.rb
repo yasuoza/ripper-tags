@@ -71,11 +71,12 @@ module RipperTags
     end
 
     def format(tag, name_field = :name)
-      "%s\t%s\t/^%s$/;\"\t%s%s%s" % [
+      "%s\t%s\t/^%s$/;\"\t%s\tline:%s%s%s" % [
         tag.fetch(name_field),
         relative_path(tag),
         display_pattern(tag),
         display_kind(tag),
+        tag.fetch(:line).to_s,
         name_field == :full_name ? nil : display_class(tag),
         display_inheritance(tag),
       ]

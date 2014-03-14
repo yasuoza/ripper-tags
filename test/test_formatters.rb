@@ -41,23 +41,25 @@ class FormattersTest < Test::Unit::TestCase
 
   def test_vim
     vim = formatter_for(:format => 'vim')
-    assert_equal %{C\t./script.rb\t/^class C < D$/;"\tc\tclass:A.B\tinherits:D}, vim.format(build_tag(
+    assert_equal %{C\t./script.rb\t/^class C < D$/;"\tc\tline:1\tclass:A.B\tinherits:D}, vim.format(build_tag(
       :kind => 'class', :name => 'C',
       :pattern => "class C < D",
       :class => 'A::B', :inherits => 'D'
     ))
-    assert_equal %{M\t./script.rb\t/^module M$/;"\tm\tclass:A.B}, vim.format(build_tag(
+    assert_equal %{M\t./script.rb\t/^module M$/;"\tm\tline:1\tclass:A.B}, vim.format(build_tag(
       :kind => 'module', :name => 'M',
       :pattern => "module M",
       :class => 'A::B'
     ))
-    assert_equal %{imethod\t./script.rb\t/^  def imethod(*args)$/;"\tf\tclass:A.B}, vim.format(build_tag(
+    assert_equal %{imethod\t./script.rb\t/^  def imethod(*args)$/;"\tf\tline:1\tclass:A.B}, vim.format(build_tag(
       :kind => 'method', :name => 'imethod',
       :pattern => "  def imethod(*args)",
       :class => 'A::B'
     ))
-    assert_equal %{smethod\t./script.rb\t/^  def self.smethod(*args)$/;"\tF\tclass:A.B}, vim.format(build_tag(
-      :kind => 'singleton method', :name => 'smethod',
+    assert_equal %{smethod\t./script.rb\t/^  def self.smethod(*args)$/;"\tF\tline:5\tclass:A.B}, vim.format(build_tag(
+      :kind => 'singleton method',
+      :line => 5,
+      :name => 'smethod',
       :pattern => "  def self.smethod(*args)",
       :class => 'A::B'
     ))
