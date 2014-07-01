@@ -25,3 +25,10 @@ ripper-tags --help
 require 'ripper-tags/parser'
 tags = RipperTags::Parser.extract("def abc() end", "mycode.rb")
 ```
+
+### install
+
+``` bash
+gem build ripper-tags.gemspec
+gem install ./ripper-tags-0.1.3.gem
+```
